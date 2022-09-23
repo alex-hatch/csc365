@@ -124,20 +124,20 @@ public class SchoolSearch {
 
     public static void gradeLow(int gradeNum, ArrayList<Student> students) {
         double lowest = Integer.MAX_VALUE;
-        Student highestStudent = null;
+        Student lowestStudent = null;
 
         for(Student s : students) {
             if(s.getGrade() == gradeNum) {
                 if(Double.parseDouble(s.getGpa()) < lowest) {
-                    highestStudent = s;
+                    lowestStudent = s;
                     lowest = Double.parseDouble(s.getGpa());
                 }
 
             }
         }
 
-        assert highestStudent != null;
-        printGrade(highestStudent);
+        assert lowestStudent != null;
+        printGrade(lowestStudent);
     }
 
     public static void average(int num, ArrayList<Student> students) {
