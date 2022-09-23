@@ -25,12 +25,34 @@ public class SchoolSearch {
 
         while(!"Quit".contains(command)) {
             String[] commandSplit = command.split(" ");
-            if("Student".contains(commandSplit[0])) {
+            if("Student:".contains(commandSplit[0])) {
                 if(commandSplit.length == 3 && "Bus".contains(commandSplit[2])) {
                     student(commandSplit[1], students, true);
                 } else {
                     student(commandSplit[1], students, false);
                 }
+            }
+            else if("Teacher:".contains(commandSplit[0])) {
+                teacher(commandSplit[1], students);
+            }
+            else if("Grade:".contains(commandSplit[0]) && commandSplit.length == 2) {
+                grade(Integer.parseInt(commandSplit[1]), students);
+            }
+            else if("Bus:".contains(commandSplit[0])) {
+                bus(Integer.parseInt(commandSplit[1]), students);
+            }
+            else if("Grade:".contains(commandSplit[0]) && commandSplit.length == 3) {
+                if ("High:".contains(commandSplit[2])) {
+                    gradeHigh(Integer.parseInt(commandSplit[1]), students);
+                } else if ("Low:".contains(commandSplit[2])) {
+                    gradeLow(Integer.parseInt(commandSplit[1]), students);
+                }
+            }
+            else if("Average:".contains(commandSplit[0])) {
+                average(Integer.parseInt(commandSplit[1]), students);
+            }
+            else if("Info".contains(commandSplit[0])) {
+                info(students);
             }
 
             System.out.print(">>> ");
@@ -58,23 +80,94 @@ public class SchoolSearch {
     }
 
     public static void teacher(String lastname, ArrayList<Student> students) {
-
+        for(Student s : students) {
+            if(s.gettLastName().equals(lastname)) {
+                System.out.println(s.getStLastName()+ ", " + s.getStFirstName());
+            }
+        }
     }
 
     public static void bus(int busNum, ArrayList<Student> students) {
+        for(Student s : students) {
+            if(s.getBus() == busNum) {
+                System.out.println(s.getStLastName()+ ", " + s.getStFirstName() + " " + s.getGrade() + " " + s.getClassroom());
+            }
+        }
 
     }
 
-    public static void grade(int gradeNum) {
+    public static void grade(int gradeNum, ArrayList<Student> students) {
+        for(Student s : students) {
+            if(s.getGrade() == gradeNum) {
+                System.out.println(s.getStLastName()+ ", " + s.getStFirstName());
+            }
+        }
+    }
+
+    public static void gradeHigh(int gradeNum, ArrayList<Student> students) {
+        double highest = Integer.MIN_VALUE;
+        Student highestStudent = null;
+
+        for(Student s : students) {
+            if(s.getGrade() == gradeNum) {
+                if(Double.parseDouble(s.getGpa()) > highest) {
+                    highestStudent = s;
+                    highest = Double.parseDouble(s.getGpa());
+                }
+
+            }
+        }
+
+        assert highestStudent != null;
+        printGrade(highestStudent);
+    }
+
+    public static void gradeLow(int gradeNum, ArrayList<Student> students) {
+        double lowest = Integer.MAX_VALUE;
+        Student highestStudent = null;
+
+        for(Student s : students) {
+            if(s.getGrade() == gradeNum) {
+                if(Double.parseDouble(s.getGpa()) < lowest) {
+                    highestStudent = s;
+                    lowest = Double.parseDouble(s.getGpa());
+                }
+
+            }
+        }
+
+        assert highestStudent != null;
+        printGrade(highestStudent);
+    }
+
+    public static void average(int num, ArrayList<Student> students) {
+        double sumGpa = 0;
+        double studentCount = 0.0;
+        for(Student s : students) {
+            if(s.getGrade() == num) {
+                sumGpa += Double.parseDouble(s.getGpa());
+                studentCount++;
+            }
+        }
+
+        System.out.println(num + ": " + (sumGpa / studentCount));
 
     }
 
-    public static void average(int num) {
+    public static void info(ArrayList<Student> students) {
+        int[] gradeCount = new int[7];
 
+        for(Student s : students) {
+            gradeCount[s.getGrade()]++;
+        }
+
+        for(int i = 0; i < gradeCount.length; i++) {
+            System.out.println(i + ": " + gradeCount[i]);
+        }
     }
 
-    public static void info() {
-
+    private static void printGrade(Student s) {
+        System.out.println(s.getStLastName() + ", " + s.getStFirstName() + " " + s.getGpa() + " " + s.gettLastName() + ", " + s.gettFirstName() + " " + s.getBus());
     }
 
 }
