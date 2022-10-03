@@ -41,7 +41,7 @@ public class SchoolSearch {
             else if("Bus:".equals(commandSplit[0]) || "B:".equals(commandSplit[0])) {
                 bus(Integer.parseInt(commandSplit[1]), students);
             }
-            else if(("Grade:".equals(commandSplit[0]) || "G".equals(commandSplit[0])) && commandSplit.length == 3) {
+            else if(("Grade:".equals(commandSplit[0]) || "G:".equals(commandSplit[0])) && commandSplit.length == 3) {
                 if ("High".equals(commandSplit[2]) || "H".equals(commandSplit[2])) {
                     gradeHigh(Integer.parseInt(commandSplit[1]), students);
                 } else if ("Low".equals(commandSplit[2]) || "L".equals(commandSplit[2])) {
