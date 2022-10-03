@@ -48,7 +48,7 @@ public class SchoolSearch {
                     gradeLow(Integer.parseInt(commandSplit[1]), students);
                 }
             }
-            else if("Average:".equals(commandSplit[0]) || "A".equals(commandSplit[0])) {
+            else if("Average:".equals(commandSplit[0]) || "A:".equals(commandSplit[0])) {
                 average(Integer.parseInt(commandSplit[1]), students);
             }
             else if("Info".equals(commandSplit[0]) || "I".equals(commandSplit[0])) {
