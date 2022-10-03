@@ -8,7 +8,7 @@ public class SchoolSearch {
 
     public static void main(String[] args) throws IOException {
         ArrayList<Student> students = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader("/Users/alexhatch/Desktop/Code/Poly/src/students.txt"));
+        BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src/students.txt"));
         String line = br.readLine();
         while(line != null) {
             String[] lineSplit = line.split(",");
@@ -23,35 +23,35 @@ public class SchoolSearch {
 
         String command = sc.nextLine();
 
-        while(!"Quit".contains(command)) {
+        while(!command.equals("Q") && !command.equals("Quit")) {
             String[] commandSplit = command.split(" ");
-            if("Student:".contains(commandSplit[0])) {
+            if("Student:".equals(commandSplit[0]) || "S:".equals(commandSplit[0])) {
                 if(commandSplit.length == 3 && "Bus".contains(commandSplit[2])) {
                     student(commandSplit[1], students, true);
                 } else {
                     student(commandSplit[1], students, false);
                 }
             }
-            else if("Teacher:".contains(commandSplit[0])) {
+            else if("Teacher:".equals(commandSplit[0]) || "T:".equals(commandSplit[0])) {
                 teacher(commandSplit[1], students);
             }
-            else if("Grade:".contains(commandSplit[0]) && commandSplit.length == 2) {
+            else if(("Grade:".equals(commandSplit[0]) || "G:".equals(commandSplit[0])) && commandSplit.length == 2) {
                 grade(Integer.parseInt(commandSplit[1]), students);
             }
-            else if("Bus:".contains(commandSplit[0])) {
+            else if("Bus:".equals(commandSplit[0]) || "B:".equals(commandSplit[0])) {
                 bus(Integer.parseInt(commandSplit[1]), students);
             }
-            else if("Grade:".contains(commandSplit[0]) && commandSplit.length == 3) {
-                if ("High:".contains(commandSplit[2])) {
+            else if(("Grade:".equals(commandSplit[0]) || "G".equals(commandSplit[0])) && commandSplit.length == 3) {
+                if ("High".equals(commandSplit[2]) || "H".equals(commandSplit[2])) {
                     gradeHigh(Integer.parseInt(commandSplit[1]), students);
-                } else if ("Low:".contains(commandSplit[2])) {
+                } else if ("Low".equals(commandSplit[2]) || "L".equals(commandSplit[2])) {
                     gradeLow(Integer.parseInt(commandSplit[1]), students);
                 }
             }
-            else if("Average:".contains(commandSplit[0])) {
+            else if("Average:".equals(commandSplit[0]) || "A".equals(commandSplit[0])) {
                 average(Integer.parseInt(commandSplit[1]), students);
             }
-            else if("Info".contains(commandSplit[0])) {
+            else if("Info".equals(commandSplit[0]) || "I".equals(commandSplit[0])) {
                 info(students);
             }
 
